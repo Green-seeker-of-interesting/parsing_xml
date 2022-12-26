@@ -11,4 +11,4 @@ class Payer:
     def __str__(self) -> str:
         out = map(str, [self.personal_account, self.full_name,
                   self.address, self.period, self.total])
-        return "; ".join(out) + "/n"
+        return "; ".join(out) # + "\n"

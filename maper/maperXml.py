@@ -3,7 +3,7 @@ from xml.etree import ElementTree
 
 from ODT import XmlFile
 from exception import InvalidXmlTree
-from maper import MaperInfo, maperPayer
+from maper import MaperInfo, MaperPayer
 
 class MaperXml:
 
@@ -22,10 +22,11 @@ class MaperXml:
 
     def _init_mapers(self) -> None:
         try:
-            root = ElementTree.parse(self.path).getroot()
+            self.tree = ElementTree.parse(self.path)
+            root = self.tree.getroot()
             info_part, payers_part = list(root)
             self.maper_info = MaperInfo(info_part)
-            self.maper_payer = maperPayer(payers_part) # type:ignore
+            self.maper_payer = MaperPayer(payers_part) 
         except ValueError as e:
             msg = "В корневом элементе {} потомка а ожидалось 2".format(
                 len(list(ElementTree.parse(self.path).getroot())))

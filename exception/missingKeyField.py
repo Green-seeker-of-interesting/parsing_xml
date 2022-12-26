@@ -1,12 +1,9 @@
-from loggerFactory import loggerFactory
+from exception import BaseExceprion
+from logger import loggerFactory
 
-class missingKeyField(Exception):
+class MissingKeyField(BaseExceprion):
 
-    def __init__(self, *args):
-        if args:
-            self.message = args[0]
-        else:
-            self.message = "Отсутствует ключевой параметр"
+    def _loging(self) -> None:
+        loggerFactory.get_loger().error(str(self))
 
-    def __str__(self):
-        pass
+

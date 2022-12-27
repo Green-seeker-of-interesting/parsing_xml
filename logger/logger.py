@@ -5,7 +5,7 @@ from logging import Logger
 
 class LoggerFactory:
 
-    def logger_strat(self, path:str) -> None:
+    def logger_strat(self, path: str) -> None:
         self.workdir = self._get_path_workdir(path)
         self._create_dir()
         self._init_logger()

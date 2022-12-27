@@ -1,6 +1,7 @@
 import unittest
 
-from maper.maperPayer import PeriodValidator
+from validator import PeriodValidator
+
 
 class PeriodValidatorTest(unittest.TestCase):
 

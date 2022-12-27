@@ -1,31 +1,8 @@
 from xml.etree.ElementTree import Element
-import re
 
 from ODT import GeneralInfo
 from exception import MisingField, MissingKeyField
-
-
-class DataValidator:
-
-    def __init__(self, date: str) -> None:
-        self.reg = r"[0-3]\d.[0,1]\d.[1,2][0,9]\d{2}"
-        self.date = date
-        self.is_valid = False
-        self._validate_date()
-
-    def _validate_date(self) -> None:
-        match = re.fullmatch(self.reg, self.date)
-        if match:
-            self.is_valid = self._range_validate()
-
-    def _range_validate(self) -> bool:
-        day, month, year = self.date.split(".")
-        if int(day) < 32 and int(month) < 13:
-            return True
-        return False
-
-    def validate(self) -> bool:
-        return self.is_valid
+from validator import DateValidator
 
 
 class MaperInfo:
@@ -73,7 +50,7 @@ class MaperInfo:
             raise MissingKeyField(
                 module_name=__name__, msg=msg, func_name=self._get_date_file.__qualname__)
 
-        if date_file and DataValidator(date_file).validate():
+        if date_file and DateValidator(date_file).validate():
             return date_file
         else:
             msg = f"Поле <ДатаФайл> не прошло валидацию Значение {date_file}" +\
